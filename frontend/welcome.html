@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #clasificador {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="welcomeMessage"></h2>
+    <img id="userPhoto" src="" alt="Foto de usuario">
+    <br>
+    <button id="clasificador">Escuelas</button>
+
+    <script>
+        document.getElementById('clasificador').onclick = function() {
+            fetch('http://localhost:5500/run_app')
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        };
+
+        // Aquí puedes inicializar el mensaje de bienvenida y la foto del usuario
+        var welcomeMessage = document.getElementById('welcomeMessage');
+        var userPhoto = document.getElementById('userPhoto');
+        welcomeMessage.textContent = 'Bienvenido, flavio!';
+        userPhoto.src = 'assets/img/unsm.jpg'; // Cambia esto a la ruta de tu imagen
+    </script>
+</body>
+</html>
