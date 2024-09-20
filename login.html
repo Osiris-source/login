@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login y Registro</title>
+    <style>
+        /* Estilos simples para el formulario */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        form input[type="text"], form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        form input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        .register-link {
+            font-size: 0.8em;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm" onsubmit="return validateLogin()">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Nombre de usuario" required>
+            <input type="password" id="loginPassword" placeholder="Contraseña" required>
+            <input type="submit" value="Iniciar sesión">
+            <p id="loginError" class="error"></p>
+        </form>
+
+        <div class="register-link">
+            <p>¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Regístrate</a></p>
+        </div>
+
+        <div id="registerFormContainer" style="display: none;">
+            <form id="registerForm" onsubmit="return validateRegister()">
+                <h2>Registro</h2>
+                <input type="text" id="registerUsername" placeholder="Nombre de usuario" required>
+                <input type="password" id="registerPassword" placeholder="Contraseña" required>
+                <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" required>
+                <input type="submit" value="Registrarse">
+                <p id="registerError" class="error"></p>
+            </form>
+        </div>
+
+        <p id="registerSuccess" class="success" style="display: none;">Registro exitoso.</p>
+    </div>
+
+    <script>
+        function validateLogin() {
+            var username = document.getElementById('loginUsername').value;
+            var password = document.getElementById('loginPassword').value;
+            var errorElement = document.getElementById('loginError');
+
+            // Aquí puedes agregar lógica adicional de validación si es necesario
+
+            // Ejemplo básico de validación
+            if (!username || !password) {
+                errorElement.textContent = 'Por favor, completa todos los campos.';
+                return false;
+            } else {
+                errorElement.textContent = '';
+                // Aquí podrías hacer una petición AJAX para validar las credenciales en el servidor
+                // Simulación de redirección a otra página o abrir una nueva ventana
+                window.location.href = 'dashboard.html'; // Redirigir al dashboard
+                return false; // Para evitar que el formulario se envíe realmente
+            }
+        }
+
+        function validateRegister() {
+            var username = document.getElementById('registerUsername').value;
+            var password = document.getElementById('registerPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var errorElement = document.getElementById('registerError');
+            var successElement = document.getElementById('registerSuccess');
+
+            // Aquí puedes agregar lógica adicional de validación si es necesario
+
+            // Ejemplo básico de validación
+            if (!username || !password || !confirmPassword) {
+                errorElement.textContent = 'Por favor, completa todos los campos.';
+                return false;
+            } else if (password !== confirmPassword) {
+                errorElement.textContent = 'Las contraseñas no coinciden.';
+                return false;
+            } else {
+                errorElement.textContent = '';
+                successElement.style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('registerFormContainer').style.display = 'none';
+                    successElement.style.display = 'none';
+                }, 3000); // Ocultar después de 3 segundos (3000 ms)
+                // Aquí podrías hacer una petición AJAX para enviar los datos de registro al servidor
+                return true;
+            }
+        }
+
+        function showRegisterForm() {
+            var registerFormContainer = document.getElementById('registerFormContainer');
+            registerFormContainer.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

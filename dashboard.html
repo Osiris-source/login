@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        /* Estilos simples para el dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        #facultadesContainer, #oficinasContainer, #carreraContainer {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .carrera-link {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bienvenido al Sistema Integral de Gestión Presupuestaria</h2>
+        <button id="showFacultadesBtn">Mostrar Facultades</button>
+        <button id="showOficinasBtn">Mostrar Oficinas</button>
+        <div id="facultadesContainer" style="display: none;">
+            <h3>Facultades</h3>
+            <ul>
+                <li class="carrera-link" onclick="showCarreraDetails('Ingeniería de Sistemas e Informática')">Ingeniería de Sistemas e Informática</li>
+                <li>Ingeniería Civil y Arquitectura
+                    <ul>
+                        <li class="carrera-link" onclick="showCarreraDetails('Arquitectura')">Arquitectura</li>
+                        <li class="carrera-link" onclick="showCarreraDetails('Ingeniería Civil')">Ingeniería Civil</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="oficinasContainer" style="display: none;">
+            <h3>Oficinas</h3>
+            <!-- Aquí puedes agregar contenido relacionado con las oficinas -->
+        </div>
+        <div id="carreraContainer" style="display: none;">
+            <h3 id="carreraTitle"></h3>
+            <p id="carreraDescription"></p>
+            <!-- Aquí puedes agregar más información sobre la carrera -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('showFacultadesBtn').onclick = function() {
+            toggleVisibility('facultadesContainer');
+        };
+
+        document.getElementById('showOficinasBtn').onclick = function() {
+            toggleVisibility('oficinasContainer');
+        };
+
+        function toggleVisibility(containerId) {
+            const container = document.getElementById(containerId);
+            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showCarreraDetails(carrera) {
+            const carreraContainer = document.getElementById('carreraContainer');
+            const carreraTitle = document.getElementById('carreraTitle');
+            const carreraDescription = document.getElementById('carreraDescription');
+            
+            carreraTitle.textContent = carrera;
+            carreraDescription.textContent = `Información detallada sobre ${carrera}. Aquí puedes incluir el presupuesto, recursos y otros detalles relevantes.`;
+
+            carreraContainer.style.display = 'block';
+            document.getElementById('facultadesContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
